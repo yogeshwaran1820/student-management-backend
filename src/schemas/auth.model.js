@@ -1,10 +1,13 @@
 const mongoose = require("mongoose");
 
-const Users = mongoose.Schema({
+const Users = new mongoose.Schema({
     rollNo: {
         type: String,
         required: false,
-        unique: true
+        index: {
+            unique: true,
+            partialFilterExpression: { rollNo: { $exists: true, $ne: null  } }
+        }
     },
     username : {
         type: String,
